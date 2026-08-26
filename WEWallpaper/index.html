@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landscape GIF Wallpaper</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #050505;
+    }
+    .wallpaper-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .wallpaper-gif {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wallpaper-container">
+    <img class="wallpaper-gif" src="https://giphy.com" alt="Wallpaper Background">
+  </div>
+
+  <!-- Audio file must be placed inside the WEWallpaper folder too -->
+  <audio id="bg-audio" src="music.ogg" autoplay loop></audio>
+
+  <script>
+    const audio = document.getElementById('bg-audio');
+
+    // Pauses the music automatically when gaming to save RAM/CPU
+    window.wallpaperPropertyListener = {
+      setPaused: function(isPaused) {
+        if (isPaused) {
+          audio.pause();
+        } else {
+          audio.play().catch(err => console.log("Audio play prevented:", err));
+        }
+      }
+    };
+  </script>
+
+</body>
+</html>
