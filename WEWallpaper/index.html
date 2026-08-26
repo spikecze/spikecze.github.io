@@ -1,4 +1,4 @@
-)<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -34,38 +34,39 @@
 <body>
 
   <div class="wallpaper-container">
-    <!-- Načítá tvůj GIF přímo z tvé složky na GitHubu, takže ho žádný cizí server nezablokuje -->
+    <!-- Lokální načítání tvého staženého GIFu -->
     <img src="220240.gif" alt="Synthwave Highway HD">
   </div>
 
-  <!-- Standardní HTML audio, které funguje spolehlivě z GitHub Pages -->
-  <audio id="bg-audio" src="music.wav" loop></audio>
+  <audio id="bg-audio" loop></audio>
 
   <script>
     const audio = document.getElementById('bg-audio');
 
-    function tryPlay() {
-      audio.play().catch(() => {
-        console.log("Autoplay čeká na interakci v prohlížeči.");
-      });
-    }
+    // Natvrdo stáhneme tvůj 2MB soubor jako surová data a vytvoříme z něj funkční audio objekt
+    fetch('music.wav')
+      .then(response => response.blob())
+      .then(blob => {
+        const blobUrl = URL.createObjectURL(blob);
+        audio.src = blobUrl;
+        audio.play().catch(() => console.log("Čekám na kliknutí pro spuštění zvuku..."));
+      })
+      .catch(err => console.error("Chyba při stahování music.wav:", err));
 
-    window.addEventListener('DOMContentLoaded', tryPlay);
-
-    // Ruční aktivace zvuku při testování na webu (stačí kliknout kamkoliv do plochy)
+    // TEST V PROHLÍŽEČI: Kliknutím kamkoliv do plochy webu zvuk okamžitě vynutíš
     window.addEventListener('click', () => {
       if (audio.paused) {
-        audio.play().catch(err => console.log("Chyba přehrávání:", err));
+        audio.play().catch(err => console.log("Audio trigger error:", err));
       }
     });
 
-    // Propojení s Wallpaper Engine (automaticky vypne zvuk, když hraješ hru)
+    // Systémové ovládání pro Wallpaper Engine (vypne hudbu, když zapneš hru)
     window.wallpaperPropertyListener = {
       setPaused: function(isPaused) {
         if (isPaused) {
           audio.pause();
         } else {
-          audio.play().catch(err => console.log("Audio blocked:", err));
+          audio.play().catch(err => console.log("Audio performance block:", err));
         }
       }
     };
