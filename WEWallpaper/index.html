@@ -14,7 +14,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background-color: #000;
+      background-color: #050505;
     }
     .wallpaper-container {
       position: absolute;
@@ -34,14 +34,28 @@
 <body>
 
   <div class="wallpaper-container">
-    <!-- Načítá tvůj GIF pod správným názvem -->
-    <img src="220240.gif" alt="Synthwave Highway">
+    <!-- Tvůj přímý AlphaCoders link -->
+    <img src="https://giffiles.alphacoders.com/220/220240.gif" alt="Synthwave Highway">
   </div>
 
-  <audio id="bg-audio" src="music.ogg" autoplay loop></audio>
+  <!-- Tvoje lokální hudba z GitHub složky -->
+  <audio id="bg-audio" src="music.ogg" loop></audio>
 
   <script>
     const audio = document.getElementById('bg-audio');
+
+    function tryPlay() {
+      audio.play().catch(() => console.log("Click page to unblock sound"));
+    }
+
+    window.addEventListener('DOMContentLoaded', tryPlay);
+
+    // Spuštění zvuku po kliknutí (pro testování v klasickém prohlížeči)
+    window.addEventListener('click', () => {
+      if (audio.paused) audio.play();
+    });
+
+    // Ovládání pro Wallpaper Engine (vypne hudbu při hře na fullscrenu)
     window.wallpaperPropertyListener = {
       setPaused: function(isPaused) {
         if (isPaused) {
