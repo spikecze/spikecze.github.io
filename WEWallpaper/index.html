@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+)<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -34,28 +34,32 @@
 <body>
 
   <div class="wallpaper-container">
-    <!-- Tvůj přímý AlphaCoders link -->
-    <img src="https://giffiles.alphacoders.com/220/220240.gif" alt="Synthwave Highway">
+    <!-- Načítá tvůj GIF přímo z tvé složky na GitHubu, takže ho žádný cizí server nezablokuje -->
+    <img src="220240.gif" alt="Synthwave Highway HD">
   </div>
 
-  <!-- Tvoje lokální hudba z GitHub složky -->
-  <audio id="bg-audio" src="music.ogg" loop></audio>
+  <!-- Standardní HTML audio, které funguje spolehlivě z GitHub Pages -->
+  <audio id="bg-audio" src="music.wav" loop></audio>
 
   <script>
     const audio = document.getElementById('bg-audio');
 
     function tryPlay() {
-      audio.play().catch(() => console.log("Click page to unblock sound"));
+      audio.play().catch(() => {
+        console.log("Autoplay čeká na interakci v prohlížeči.");
+      });
     }
 
     window.addEventListener('DOMContentLoaded', tryPlay);
 
-    // Spuštění zvuku po kliknutí (pro testování v klasickém prohlížeči)
+    // Ruční aktivace zvuku při testování na webu (stačí kliknout kamkoliv do plochy)
     window.addEventListener('click', () => {
-      if (audio.paused) audio.play();
+      if (audio.paused) {
+        audio.play().catch(err => console.log("Chyba přehrávání:", err));
+      }
     });
 
-    // Ovládání pro Wallpaper Engine (vypne hudbu při hře na fullscrenu)
+    // Propojení s Wallpaper Engine (automaticky vypne zvuk, když hraješ hru)
     window.wallpaperPropertyListener = {
       setPaused: function(isPaused) {
         if (isPaused) {
