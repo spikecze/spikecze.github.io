@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landscape GIF Wallpaper</title>
+  <title>Landscape Live Wallpaper</title>
   <style>
     * {
       margin: 0;
@@ -14,7 +14,7 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background-color: #050505;
+      background-color: #000;
     }
     .wallpaper-container {
       position: absolute;
@@ -23,7 +23,7 @@
       width: 100%;
       height: 100%;
     }
-    .wallpaper-gif {
+    img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -34,22 +34,20 @@
 <body>
 
   <div class="wallpaper-container">
-    <!-- Updated with your requested direct URL -->
-    <img class="wallpaper-gif" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWRjcjkwcnYwN3R5dzdzNDhmeHJtZmY5d3ZjZ253bnExNDY4dXd4dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Wm9XlKG2xIMiVcH4CP/giphy.gif" alt="Vaporwave Background">
+    <!-- Načítá tvůj GIF pod správným názvem -->
+    <img src="220240.gif" alt="Synthwave Highway">
   </div>
 
-  <!-- Be sure your music file is named music.ogg and placed in the same folder -->
   <audio id="bg-audio" src="music.ogg" autoplay loop></audio>
 
   <script>
     const audio = document.getElementById('bg-audio');
-
     window.wallpaperPropertyListener = {
       setPaused: function(isPaused) {
         if (isPaused) {
           audio.pause();
         } else {
-          audio.play().catch(err => console.log("Audio playback blocked:", err));
+          audio.play().catch(err => console.log("Audio blocked:", err));
         }
       }
     };
