@@ -34,22 +34,22 @@
 <body>
 
   <div class="wallpaper-container">
-    <img class="wallpaper-gif" src="https://giphy.com" alt="Wallpaper Background">
+    <!-- Updated with your requested direct URL -->
+    <img class="wallpaper-gif" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWRjcjkwcnYwN3R5dzdzNDhmeHJtZmY5d3ZjZ253bnExNDY4dXd4dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Wm9XlKG2xIMiVcH4CP/giphy.gif" alt="Vaporwave Background">
   </div>
 
-  <!-- Audio file must be placed inside the WEWallpaper folder too -->
+  <!-- Be sure your music file is named music.ogg and placed in the same folder -->
   <audio id="bg-audio" src="music.ogg" autoplay loop></audio>
 
   <script>
     const audio = document.getElementById('bg-audio');
 
-    // Pauses the music automatically when gaming to save RAM/CPU
     window.wallpaperPropertyListener = {
       setPaused: function(isPaused) {
         if (isPaused) {
           audio.pause();
         } else {
-          audio.play().catch(err => console.log("Audio play prevented:", err));
+          audio.play().catch(err => console.log("Audio playback blocked:", err));
         }
       }
     };
